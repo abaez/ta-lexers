@@ -38,7 +38,8 @@ local keyword = token(l.KEYWORD, word_match{
 local identifier = token(l.IDENTIFIER, l.word)
 
 -- variable
-local variable = token("variable", S'$'^1 * l.word)
+local vars = S'$'^1 * (S'{'^1 * l.word * S'}'^1 + l.word)
+local variable = token("variable", vars)
 
 -- Operators.
 local operator = token(l.OPERATOR, S('\\[],'))
