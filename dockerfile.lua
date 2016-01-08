@@ -37,17 +37,27 @@ local keyword = token(l.KEYWORD, word_match{
 -- identifiers
 local identifier = token(l.IDENTIFIER, l.word)
 
+-- variable
+local variable = token("variable", S'$'^1 * l.word)
+
 -- Operators.
 local operator = token(l.OPERATOR, S('\\[],'))
+
+local all_ops = token(l.OPERATOR, S(':<>[]\\@${}'))
 
 M._rules = {
   {'whitespace', ws},
   {'keyword', keyword},
+  {'variable', variable},
   {'identifier', identifier},
   {'string', string},
   {'comment', comment},
   {'number', number},
   {'operator', operator},
+}
+
+M._tokenstyles = {
+  variable    = l.REGEX,
 }
 
 M._FOLDBYINDENTATION = true
