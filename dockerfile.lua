@@ -42,9 +42,9 @@ local vars = S'$'^1 * (S'{'^1 * l.word * S'}'^1 + l.word)
 local variable = token("variable", vars)
 
 -- Operators.
-local operator = token(l.OPERATOR, S('\\[],'))
-
-local all_ops = token(l.OPERATOR, S(':<>[]\\@${}'))
+local base_ops = S('\\[],=:{}')
+local exp_ops = S('@$?*/')
+local operator = token(l.OPERATOR, base_ops)
 
 M._rules = {
   {'whitespace', ws},
