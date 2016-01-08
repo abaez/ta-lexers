@@ -21,8 +21,10 @@ local comment = token(l.COMMENT, '#' * l.nonnewline^0)
 -- Strings.
 local sq_str = l.delimited_range("'", false, true)
 local dq_str = l.delimited_range('"')
-local ex_str = l.delimited_range('`')
-local string = token(l.STRING, sq_str + dq_str + ex_str)
+local string = token(l.STRING, sq_str + dq_str)
+
+-- numbers
+local number = token(l.NUMBER, l.float + l.integer)
 
 -- Keywords.
 local keyword = token(l.KEYWORD, word_match{
@@ -31,3 +33,23 @@ local keyword = token(l.KEYWORD, word_match{
   "COPY",     "ENTRYPOINT",   "VOLUME",   "USER",
   "WORKDIR",  "ARG",          "ONBUILD",  "STOPSIGNAL"
 })
+
+-- identifiers
+local identifier = token(l.IDENTIFIER, l.word)
+
+-- Operators.
+local operator = token(l.OPERATOR, S('=!<>+-/*^&|~.,:;?()[]{}'))
+
+M._rules = {
+  {'whitespace', ws},
+  {'keyword', keyword},
+  {'identifier', identifier},
+  {'string', string},
+  {'comment', comment},
+  {'number', number},
+  {'operator', operator},
+}
+
+M._FOLDBYINDENTATION = true
+
+return M
