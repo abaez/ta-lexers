@@ -1,7 +1,7 @@
 --- Moonscript LPeg lexer.
 -- See @{README.md} for details on usage. Used Mitchell's lua and original
 -- Leaf's moonscript lexer for reference.
--- @author [Alejandro Baez](https://twitter.com/a_baez)
+-- @author [Alejandro Baez](https://keybase.io/baez)
 -- @copyright 2016
 -- @license MIT (see LICENSE)
 -- @module moonscript

@@ -1,6 +1,6 @@
 --- lexer for pico8.
 -- Uses embeddings of lua and text for pico8.
--- @author [Alejandro Baez](https://twitter.com/a_baez)
+-- @author [Alejandro Baez](https://keybase.io/baez)
 -- @copyright 2016
 -- @license MIT (see LICENSE)
 -- @module pico8

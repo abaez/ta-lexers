@@ -1,5 +1,5 @@
 --- ansi_c loader for linux lexer.
--- @author Alejandro Baez <alejan.baez@gmail.com>
+-- @author [Alejandro Baez](https://keybase.io/baez)
 -- @copyright 2016
 -- @license GPL-2.0 (see LICENSE)
 -- @module linux
