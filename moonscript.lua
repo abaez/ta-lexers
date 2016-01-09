@@ -2,7 +2,7 @@
 -- See @{README.md} for details on usage. Used Mitchell's lua and original
 -- Leaf's moonscript lexer for reference.
 -- @author [Alejandro Baez](https://twitter.com/a_baez)
--- @copyright 2015
+-- @copyright 2016
 -- @license MIT (see LICENSE)
 -- @module moonscript
 

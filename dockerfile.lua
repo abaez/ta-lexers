@@ -1,7 +1,7 @@
 --- Dockerfile LPeg lexer.
 -- @author [Alejandro Baez](https://twitter.com/a_baez)
 -- copyright 2016
--- @license BSD-2 (see LICENSE)
+-- @license MIT (see LICENSE)
 -- @module dockerfile
 
 local l = require("lexer")

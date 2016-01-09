@@ -1,7 +1,7 @@
 --- TOML LPeg lexer.
 -- Used yaml.lua and lua.lua for reference.
 -- @author [Alejandro Baez](https://twitter.com/a_baez)
--- copyright 2015
+-- copyright 2016
 -- @license MIT (see LICENSE)
 -- @module toml
 
