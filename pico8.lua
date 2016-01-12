@@ -11,13 +11,43 @@ local P, R, S = lpeg.P, lpeg.R, lpeg.S
 
 local M = {_NAME = 'pico8'}
 
-local text = l.load("html")
 local lual = l.load("lua")
 
--- Embed lua to text.
+-- Embed lua to pico ;).
 local lual_start_rule = token('pico8_tag', '__lua__')
 local lual_end_rule   = token('pico8_tag', '__gfx__' )
 l.embed_lexer(text, lual, lual_start_rule, lual_end_rule)
+
+-- Whitespace
+local ws = token(l.WHITESPACE, l.space^1)
+
+-- Comments
+local line_comment = '//' * l.nonnewline_esc^0
+local comment = token(l.COMMENT, line_comment)
+
+-- Numbers
+local number = token(l.NUMBER, l.integer)
+
+-- Keywords
+local keyword = token(l.KEYWORD, word_match{
+  'lua', 'gfx', 'gff', 'map', 'sfx', 'music'
+} * l.delimited_range("__"))
+
+-- Identifiers
+local identifier = token(l.IDENTIFIER, l.word)
+
+-- Operators
+local operator = token(l.OPERATOR, S('_'))
+
+M._rules = {
+  {'whitespace', ws},
+  {'keyword', keyword},
+  {'identifier', identifier},
+  {'comment', comment},
+  {'number', number},
+  {'operator', operator},
+}
+
 
 M._tokenstyles = {
   pico8_tag = l.STYLE_EMBEDDED
