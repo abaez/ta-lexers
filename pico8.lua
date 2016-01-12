@@ -11,13 +11,6 @@ local P, R, S = lpeg.P, lpeg.R, lpeg.S
 
 local M = {_NAME = 'pico8'}
 
-local lual = l.load("lua")
-
--- Embed lua to pico ;).
-local lual_start_rule = token('pico8_tag', '__lua__')
-local lual_end_rule   = token('pico8_tag', '__gfx__' )
-l.embed_lexer(text, lual, lual_start_rule, lual_end_rule)
-
 -- Whitespace
 local ws = token(l.WHITESPACE, l.space^1)
 
@@ -48,6 +41,12 @@ M._rules = {
   {'operator', operator},
 }
 
+-- Embed lua to pico ;).
+local lual = l.load("lua")
+
+local lual_start_rule = token('pico8_tag', '__lua__')
+local lual_end_rule   = token('pico8_tag', '__gfx__' )
+l.embed_lexer(M, lual, lual_start_rule, lual_end_rule)
 
 M._tokenstyles = {
   pico8_tag = l.STYLE_EMBEDDED
