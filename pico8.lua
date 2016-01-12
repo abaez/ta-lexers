@@ -23,8 +23,9 @@ local number = token(l.NUMBER, l.integer)
 
 -- Keywords
 local keyword = token(l.KEYWORD, word_match{
-  'lua', 'gfx', 'gff', 'map', 'sfx', 'music'
-} * l.delimited_range("__"))
+  '__lua__', '__gfx__', '__gff__',
+  '__map__', '__sfx__', '__music__'
+})
 
 -- Identifiers
 local identifier = token(l.IDENTIFIER, l.word)
