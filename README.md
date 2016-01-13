@@ -11,6 +11,7 @@ maintaining.
 
 #### Lexers
 *   dockerfile
+*   etlua
 *   linux
 *   love
 *   moonscript
