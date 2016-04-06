@@ -36,10 +36,10 @@ local operator = token(l.OPERATOR, S('_'))
 M._rules = {
   {'whitespace', ws},
   {'keyword', keyword},
-  {'identifier', identifier},
   {'comment', comment},
   {'number', number},
   {'operator', operator},
+  {'identifier', identifier},
 }
 
 -- Embed lua to pico ;).

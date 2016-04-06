@@ -50,15 +50,15 @@ M._rules = {
   {'whitespace', ws},
   {'keyword', keyword},
   {'variable', variable},
-  {'identifier', identifier},
   {'string', string},
   {'comment', comment},
   {'number', number},
   {'operator', operator},
+  {'identifier', identifier},
 }
 
 M._tokenstyles = {
-  variable    = l.REGEX,
+  variable    = l.STYLE_REGEX,
 }
 
 M._FOLDBYINDENTATION = true
