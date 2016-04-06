@@ -18,6 +18,7 @@ maintaining.
 *   pico8
 *   rust
 *   toml
+*   velox
 
 ### USAGE
 Clone into your `_USERHOME/lexers` directory like so:

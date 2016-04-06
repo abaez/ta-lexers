@@ -1,4 +1,4 @@
--- lexer for velox.conf file.
+-- lexer for [velox.conf](https://github.com/michaelforney/velox).
 -- @author [Alejandro Baez](https://keybase.io/baez)
 -- @copyright 2016
 -- @license MIT (see LICENSE)
