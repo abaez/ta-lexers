@@ -45,7 +45,7 @@ local keyword = token(l.KEYWORD, word_match{
 })
 
 -- Library types
-local library = token(l.LABEL, l.upper * (l.lower + l.dec_num)^1)
+local library = token('library', l.upper * (l.lower + l.dec_num)^1)
 
 -- syntax extensions
 local extension = l.word^1 * S("!")
@@ -84,8 +84,8 @@ M._rules = {
 }
 
 M._tokenstyles = {
-  attribute = l.STYLE_PREPROCESSOR
-
+  attribute = l.STYLE_PREPROCESSOR,
+  library = l.STYLE_CLASS,
 }
 
 M._foldsymbols = {
