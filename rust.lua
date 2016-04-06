@@ -66,7 +66,7 @@ local identifier = token(l.IDENTIFIER, l.word)
 local operator = token(l.OPERATOR, S('+-/*%<>!=`^~@&|?#~:;,.()[]{}'))
 
 -- Attributes.
-local attribute = token(l.PREPROCESSOR, "#[" *
+local attribute = token('attribute', S('#![')^1 *
                         (l.nonnewline - ']')^0 * P("]")^-1)
 
 M._rules = {
@@ -75,12 +75,17 @@ M._rules = {
   {'function', func},
   {'library', library},
   {'type', type},
-  {'identifier', identifier},
   {'string', string},
   {'comment', comment},
   {'number', number},
+  {'attribute', attribute},
   {'operator', operator},
-  {'preprocessor', attribute},
+  {'identifier', identifier},
+}
+
+M._tokenstyles = {
+  attribute = l.STYLE_PREPROCESSOR
+
 }
 
 M._foldsymbols = {
