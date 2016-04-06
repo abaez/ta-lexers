@@ -48,9 +48,7 @@ local keyword = token(l.KEYWORD, word_match{
 local library = token('library', l.upper * (l.lower + l.dec_num)^1)
 
 -- syntax extensions
-local extension = l.word^1 * S("!")
-
-local func = token(l.FUNCTION, extension)
+local extension = token('extension', l.word^1 * S("!"))
 
 -- Types.
 local type = token(l.TYPE, word_match{
@@ -72,7 +70,7 @@ local attribute = token('attribute', S('#![')^1 *
 M._rules = {
   {'whitespace', ws},
   {'keyword', keyword},
-  {'function', func},
+  {'extension', extension},
   {'library', library},
   {'type', type},
   {'string', string},
@@ -86,6 +84,7 @@ M._rules = {
 M._tokenstyles = {
   attribute = l.STYLE_PREPROCESSOR,
   library = l.STYLE_CLASS,
+  extension = l.STYLE_FUNCTION
 }
 
 M._foldsymbols = {
