@@ -58,7 +58,7 @@ M._rules = {
 }
 
 M._tokenstyles = {
-  variable    = l.STYLE_REGEX,
+  variable    = l.STYLE_VARIABLE,
 }
 
 M._FOLDBYINDENTATION = true
