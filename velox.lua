@@ -32,7 +32,9 @@ local operator = token(l.OPERATOR, S".,:")
 
 -- Keys
 local constant = token(l.CONSTANT, l.word_match({
-  "alt", "ctrl", "mod", "return", "shift", "space", "tab"
+  "alt", "ctrl", "mod", "return", "shift", "space", "tab",
+  "left", "right"
+
 }, nil, true))
 
 local char = token("char", R("az")^-1 * l.space )
