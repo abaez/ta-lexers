@@ -43,7 +43,6 @@ local keyword = token(l.KEYWORD, word_match{
   'true', 'false'
 })
 
-
 -- Identifiers.
 local identifier = token(l.IDENTIFIER, l.word)
 
@@ -53,13 +52,13 @@ local operator = token(l.OPERATOR, S('#=+-,.{}[]()'))
 M._rules = {
   {'indent', indent},
   {'whitespace', ws},
-  {'keyword', keyword},
-  {'identifier', identifier},
-  {'operator', operator},
-  {'string', string},
   {'comment', comment},
-  {'number', number},
+  {'keyword', keyword},
   {'timestamp', ts},
+  {'string', string},
+  {'number', number},
+  {'operator', operator},
+  {'identifier', identifier},
 }
 
 M._tokenstyles = {
