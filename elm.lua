@@ -36,4 +36,31 @@ local keyword = token(l.KEYWORD, word_match{
   'then',       'type',       'var',      'where'
 })
 
-local alias = token("alias", l.upper^-1 * l.word^1)
+-- Types.
+local type = token(l.TYPE, l.upper * (l.lower + l.dec_num)^1)
+
+-- Identifiers.
+local identifier = token(l.IDENTIFIER, l.word)
+
+-- Operators.
+local operator = token(l.OPERATOR, S"-+/*^`,.:;={}()[]<>?|\\")
+
+-- Functions.
+local func = token(l.FUNCTION, P'$' * l.lower^1 * " ")
+
+M._rules = {
+  {'whitespace', ws},
+  {'function', func},
+  {'keyword', keyword},
+  {'type', type},
+  {'char', char},
+  {'string', string},
+  {'comment', comment},
+  {'number', number},
+  {'operator', operator},
+  {'identifier', identifier}
+}
+
+M._FOLDBYINDENTATION = true
+
+return M
