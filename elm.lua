@@ -43,7 +43,7 @@ local type = token(l.TYPE, l.upper * (l.lower + l.dec_num)^1)
 local identifier = token(l.IDENTIFIER, l.word)
 
 -- Operators.
-local operator = token(l.OPERATOR, S"-+/*^`,.:;={}()[]<>?|\\")
+local operator = token(l.OPERATOR, S"-+/*^&`,.:;={}()[]<>?|\\")
 
 -- Functions.
 local func = token(l.FUNCTION, P'$' * l.lower^1 * " ")
