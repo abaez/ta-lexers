@@ -45,12 +45,9 @@ local identifier = token(l.IDENTIFIER, l.word)
 -- Operators.
 local operator = token(l.OPERATOR, S"-+/*^&`,.:;={}()[]<>?|\\")
 
--- Functions.
-local func = token(l.FUNCTION, P'$' * l.lower^1 * " ")
 
 M._rules = {
   {'whitespace', ws},
-  {'function', func},
   {'keyword', keyword},
   {'type', type},
   {'char', char},
