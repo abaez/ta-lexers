@@ -33,7 +33,7 @@ local keyword = token(l.KEYWORD, word_match{
   'as',         'alias',      'and',      'case',     'else',
   'exposing',   'if',         'in',       'infixr',   'import',
   'let',        'module',     'not',      'of',       'or',
-  'then',       'type',       'var',      'where'
+  'port',       'then',       'type',     'var',      'where'
 })
 
 -- Types.
