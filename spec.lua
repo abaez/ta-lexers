@@ -26,13 +26,24 @@ local keywords = token(l.KEYWORDS, word_match{
 
 -- Tags.
 local tags_default = word_match({
-  "summary", "name", "version", "release", "copyright", "group", "source",
-  "url", "distribution", "vendor", "packager"
+  -- Package Naming Tags
+  'name', 'version', 'release',
+  -- Descriptive Tags
+  'description', 'summary', 'copyright',  'distribution',
+  'icon', 'vendor', 'url', 'group',  'packager',
+  -- Dependency Tags
+  'provides', 'requires', 'conflicts', 'serial', 'autoreqprov',
+  -- Architecture Tags
+  'excludearch', 'exclusivearch',  'excludeos', 'exclusiveos',
+  -- Directory-related Tags
+  'prefix', 'buildroot',
+  -- Source and Patch Tags
+  'source', 'nosource', 'patch', 'nopatch'
 }, '', true)
 
 local tags_any = l.word * l.space^0 * S':'
 
-local tags = token("tags",  tags_default + tags_any)
+local tags = token("tags",  tags_default)
 
 -- identifiers
 --local identifier = token(l.IDENTIFIER, l.word)
