@@ -42,7 +42,10 @@ local keyword = token(l.KEYWORD, '%' * word_match{
   'package',
 
   -- Conditionals
-  'ifarch', 'ifnarch', 'ifos', 'ifnos', 'else', 'endif'
+  'ifarch', 'ifnarch', 'ifos', 'ifnos', 'else', 'endif',
+
+  -- really a tag
+  'description'
 })
 
 -- Tags.
