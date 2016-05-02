@@ -21,7 +21,28 @@ local number = token(l.NUMBER, l.float + l.integer)
 
 -- Keywords.
 local keywords = token(l.KEYWORDS, word_match{
-  "foo"
+  -- Build-time Scripts
+  'build', 'prep', 'install', 'clean',
+  -- Install/Erase-time Scripts
+  'pre', 'post', 'preun', 'postun',
+  -- Verification-Time Script
+  'verifyscript'
+
+  -- Package Builders macros
+  'setup', 'patch'
+
+  -- File
+  'files'
+  -- File-related Directives
+  'doc', 'config', 'attr', 'verify',
+  -- Directory-related Directives
+  'docdir', 'dir',
+
+  -- Package directive
+  'package',
+
+  -- Conditionals
+  'ifarch', 'ifnarch', 'ifos', 'ifnos', 'else', 'endif'
 })
 
 -- Tags.
@@ -56,7 +77,7 @@ local variable = token("variable", vars)
 local macros = token('macros', S'%' * l.word)
 
 -- Operators.
-local base_ops = S('%:\\[],=:{}')
+local base_ops = S('%:\\[],-=:{}')
 local exp_ops = S('@$?*/')
 local operator = token(l.OPERATOR, base_ops)
 
