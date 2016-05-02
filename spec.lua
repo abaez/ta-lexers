@@ -20,19 +20,19 @@ local comment = token(l.COMMENT, '#' * l.nonnewline^0)
 local number = token(l.NUMBER, l.float + l.integer)
 
 -- Keywords.
-local keywords = token(l.KEYWORDS, word_match{
+local keyword = token(l.KEYWORD, '%' * word_match{
   -- Build-time Scripts
   'build', 'prep', 'install', 'clean',
   -- Install/Erase-time Scripts
   'pre', 'post', 'preun', 'postun',
   -- Verification-Time Script
-  'verifyscript'
+  'verifyscript',
 
   -- Package Builders macros
-  'setup', 'patch'
+  'setup', 'patch',
 
   -- File
-  'files'
+  'files',
   -- File-related Directives
   'doc', 'config', 'attr', 'verify',
   -- Directory-related Directives
@@ -62,15 +62,15 @@ local tags_default = word_match({
   'source', 'nosource', 'patch', 'nopatch'
 }, '', true)
 
-local tags_any = l.word * l.space^0 * S':'
+local tags_any = l.word * l.space^1
 
-local tags = token("tags",  tags_default)
+local tags = token("tags",  (tags_default + tags_any) * S':')
 
 -- identifiers
 --local identifier = token(l.IDENTIFIER, l.word)
 
 -- Variable.
-local vars = S'%'^1 * (S'{'^1 * l.word * S'}'^1)
+local vars = S'%'^1 * ('{' * l.word * '}')
 local variable = token("variable", vars)
 
 -- Macros.
@@ -87,17 +87,17 @@ M._rules = {
   {'variable', variable},
   --{'string', string},
   {'tags', tags},
-  {'macros', macros},
+  --{'macros', macros},
   {'comment', comment},
   {'number', number},
   {'operator', operator},
-  {'identifier', identifier},
+  --{'identifier', identifier},
 }
 
 M._tokenstyles = {
   variable    = l.STYLE_VARIABLE,
   tags = l.STYLE_TYPE,
-  macros = l.STYLE_FUNCTION,
+  --macros = l.STYLE_FUNCTION,
 }
 
 M._FOLDBYINDENTATION = true
