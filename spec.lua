@@ -65,9 +65,10 @@ local tags_default = word_match({
   'source', 'nosource', 'patch', 'nopatch'
 }, '', true)
 
-local tags_any = l.word * l.space^1
+local tags_any = l.word * l.space^0
 
-local tags = token("tags",  (tags_default + tags_any) * S':')
+local tags = token("tags",  tags_default * ':')
+
 
 -- identifiers
 --local identifier = token(l.IDENTIFIER, l.word)
@@ -77,7 +78,9 @@ local vars = S'%'^1 * ('{' * l.word * '}')
 local variable = token("variable", vars)
 
 -- Macros.
-local macros = token('macros', S'%' * l.word)
+local macros = '%' * l.word
+
+local custom = token("custom", (tags_any * ':') + macros )
 
 -- Operators.
 local base_ops = S('%:\\[],-=:{}')
@@ -90,7 +93,7 @@ M._rules = {
   {'variable', variable},
   --{'string', string},
   {'tags', tags},
-  --{'macros', macros},
+  {'custom', custom},
   {'comment', comment},
   {'number', number},
   {'operator', operator},
@@ -100,7 +103,7 @@ M._rules = {
 M._tokenstyles = {
   variable    = l.STYLE_VARIABLE,
   tags = l.STYLE_TYPE,
-  --macros = l.STYLE_FUNCTION,
+  custom = l.STYLE_FUNCTION,
 }
 
 M._FOLDBYINDENTATION = true
