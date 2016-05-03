@@ -69,13 +69,8 @@ local tags_any = l.word * l.space^0
 
 local tags = token("tags",  tags_default * ':')
 
-
--- identifiers
---local identifier = token(l.IDENTIFIER, l.word)
-
 -- Variable.
-local vars = S'%'^1 * ('{' * l.word * '}')
-local variable = token("variable", vars)
+local variable = token("variable",  '%{' * l.word * '}')
 
 -- Macros.
 local macros = '%' * l.word
@@ -90,14 +85,12 @@ local operator = token(l.OPERATOR, base_ops)
 M._rules = {
   {'whitespace', ws},
   {'keyword', keyword},
-  {'variable', variable},
-  --{'string', string},
   {'tags', tags},
   {'custom', custom},
+  {'variable', variable},
   {'comment', comment},
   {'number', number},
   {'operator', operator},
-  --{'identifier', identifier},
 }
 
 M._tokenstyles = {
