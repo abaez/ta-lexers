@@ -33,16 +33,16 @@ local keyword = token(l.KEYWORD, default_key + future_key)
 
 -- literal types
 local literals = token('literals', word_match{
-  'null',       'true',           'false',      'string',       'memory',
-  'storage',
+  'address',     'bool',          'byte',       'false'
+  'null',       'true',
+  'false',       'string',
+  'memory',      'storage',
 })
 
 -- dynamic types
 local dynamic = word_match{
   'bytes',        'int',          'uint'
 }
-
-
 
 local type = token(l.TYPE, literals + dynamic)
 
