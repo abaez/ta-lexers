@@ -21,4 +21,6 @@ local keyword = token(l.KEYWORD, word_match{
   'struct',       'throw',        'var',        'while'
 })
 
+local operator = token(l.OPERATOR, S'()[]{}:;.?=<>|^&-+*/%,!~')
+
 return M
