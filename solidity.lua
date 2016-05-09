@@ -37,31 +37,32 @@ local future_key = word_match{
 -- default keys
 local default_key = word_match{
   'anonymous',    'assembly',     'break',      'constant',     'continue',
-  'contract',     'default',      'delete'      'do',           'else',
+  'contract',     'default',      'delete',     'do',           'else',
   'enum',         'event',        'external',   'for',          'function',
   'if',           'indexed',      'internal',   'import',       'import',
   'is',           'library',      'mapping',    'memory',       'modifier',
   'new',          'public',       'private',    'return',       'returns',
-  'storage',      'struct',       'throw',      'var',          'while'
+  'storage',      'struct',       'throw',      'var',          'while',
 }
 
 local keyword = token(l.KEYWORD, default_key + future_key)
 
 -- literal types
-local literals = token('literals', word_match{
+local literals = word_match{
   'address',     'bool',          'byte',       'false',
   'null',       'true',
   'false',       'string',
   'memory',      'storage',
-})
+}
 
 -- dynamic types
 local dynamic = word_match{
   'bytes',        'int',          'uint'
 }
 
-local type = token(l.TYPE, literals + dynamic)
+local type = token(l.TYPE, literals + dynamic + (dynamic * l.dec_num))
 
+-- Operators.
 local operator = token(l.OPERATOR, S'()[]{}:;.?=<>|^&-+*/%,!~')
 
 -- Identifiers.
@@ -78,6 +79,11 @@ M._rules = {
   {'identifier', identifier}
 }
 
+M._foldsymbols = {
+  _patterns = {'%l+', '[{}]', '/%*', '%*/', '//'},
+  [l.COMMENT] = {['/*'] = 1, ['*/'] = -1, ['//'] = l.fold_line_comments('//')},
+  [l.OPERATOR] = {['('] = 1, ['{'] = 1, [')'] = -1, ['}'] = -1}
+}
 
 
 return M
