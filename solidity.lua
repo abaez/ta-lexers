@@ -11,6 +11,22 @@ local P, R, S = lpeg.P, lpeg.R, lpeg.S
 
 local M = {_NAME = 'solidity'}
 
+-- Whitespace.
+local ws = token(l.WHITESPACE,  l.space^1)
+
+-- Comments.
+local line_comment = '//' * l.nonnewline_esc^0
+local block_comment = '/*' * (l.any - '*/')^0 * P('*/')^-1
+local comment = token(l.COMMENT, line_comment + block_comment)
+
+-- Strings.
+local sq_str = l.delimited_range("'", false, true)
+local dq_str = l.delimited_range('"', false, true)
+local string = token(l.STRING, sq_str + dq_str)
+
+-- Numbers.
+local number = token(l.NUMBER, l.float + l.integer)
+
 -- keywords reversed for future use
 local future_key = word_match{
   'as',           'case',         'catch',      'final',        'inline',
@@ -33,7 +49,7 @@ local keyword = token(l.KEYWORD, default_key + future_key)
 
 -- literal types
 local literals = token('literals', word_match{
-  'address',     'bool',          'byte',       'false'
+  'address',     'bool',          'byte',       'false',
   'null',       'true',
   'false',       'string',
   'memory',      'storage',
@@ -47,5 +63,21 @@ local dynamic = word_match{
 local type = token(l.TYPE, literals + dynamic)
 
 local operator = token(l.OPERATOR, S'()[]{}:;.?=<>|^&-+*/%,!~')
+
+-- Identifiers.
+local identifier = token(l.IDENTIFIER, l.word)
+
+M._rules = {
+  {'whitespace', ws},
+  {'keyword', keyword},
+  {'type', type},
+  {'string', string},
+  {'comment', comment},
+  {'number', number},
+  {'operator', operator},
+  {'identifier', identifier}
+}
+
+
 
 return M
