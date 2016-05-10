@@ -56,11 +56,18 @@ local literals = word_match{
 }
 
 -- dynamic types
-local dynamic = word_match{
+local static = {
   'bytes',        'int',          'uint'
 }
 
-local type = token(l.TYPE, literals + dynamic + (dynamic * l.dec_num))
+local dynamic = 'null'
+for i = 1, #static do
+  dynamic = dynamic + (static[i] * l.dec_num) + static[i]
+end
+
+
+
+local type = token(l.TYPE, literals + dynamic)
 
 -- Operators.
 local operator = token(l.OPERATOR, S'()[]{}:;.?=<>|^&-+*/%,!~')
