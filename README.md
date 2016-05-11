@@ -17,7 +17,9 @@ maintaining.
 *   love
 *   moonscript
 *   pico8
+*   rpmspec
 *   rust
+*   solidity
 *   toml
 *   velox
 
