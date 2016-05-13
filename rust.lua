@@ -53,7 +53,7 @@ local library = token('library', l.upper * (l.lower + l.dec_num)^1)
 local extension = token('extension', l.word^1 * S("!"))
 
 -- Lifetimes
-local lifetime = token('lifetime', "'" * l.alnum)
+local lifetime = token('lifetime', "'" * ("static" + l.alnum))
 
 -- Types.
 local type = token(l.TYPE, word_match{
