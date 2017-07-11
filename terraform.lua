@@ -30,7 +30,7 @@ local identifier = token(l.IDENTIFIER, l.word)
 
 -- Keywords.
 local keyword = token(l.KEYWORD, word_match{
-  'true', 'false', 'resource', 'connection', 'variable'
+  'true', 'false', 'resource', 'connection', 'variable', 'data', 'output'
 })
 
 -- Library functions.
