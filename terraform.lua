@@ -33,6 +33,18 @@ local keyword = token(l.KEYWORD, word_match{
   'true', 'false', 'resource', 'connection', 'variable'
 })
 
+-- Library functions.
+local library = token('library', word_match{
+  'basename', 'base64decode', 'base64encode', 'base64sha512', 'bcrypt'
+  , 'ceil', 'chomp', 'cidrhost', 'cidrnetmask', 'cidrsubnet', 'coalesce'
+  , 'coalescelist', 'compact', 'concat', 'dirname', ' distinct', 'element'
+  , 'file', 'floor', 'format', 'formatlist', 'index', 'join', 'jsonencode'
+  , 'keys', 'length', 'list', 'log', 'lookup', 'lower', 'map', 'matchkey'
+  , 'max', 'merge', 'min', 'md5', 'pathexpand', 'pow', 'replace', 'sha1'
+  , 'sha256', 'sha512', 'signum', 'slice', 'sort', 'split', 'substr'
+  , 'timestamp', 'title', 'upper', 'uuid', 'values', 'zipmap'
+})
+
 local vars = S'$'^1 * (S'{'^1 * l.word * S'}'^1 + l.word)
 local variable = token("variable", vars)
 
@@ -42,6 +54,7 @@ local operator = token(l.OPERATOR, S"#/*=${}(),.?[]:<>!|")
 M._rules = {
   {'whitespace', ws}
   , {'keyword', keyword}
+  , {'library', library}
   , {'string', string}
   , {'comment', comment}
   , {'variable', variable}
@@ -51,6 +64,7 @@ M._rules = {
 }
 
 M._tokenstyles = {
+  library = l.STYLE_FUNCTION,
   variable = l.STYLE_VARIABLE
 }
 
