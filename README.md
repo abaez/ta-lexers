@@ -20,6 +20,7 @@ maintaining.
 *   rpmspec
 *   rust
 *   solidity
+*   terraform
 *   toml
 *   velox
 
