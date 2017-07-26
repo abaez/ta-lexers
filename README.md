@@ -13,6 +13,7 @@ maintaining.
 *   dockerfile
 *   elm
 *   etlua
+*   ion
 *   linux
 *   love
 *   moonscript
