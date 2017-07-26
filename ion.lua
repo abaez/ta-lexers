@@ -27,3 +27,36 @@ local str = token(l.STRING, sq_str + dq_str)
 -- Numbers
 local number = token(l.NUMBER, l.float + l.integer)
 
+
+-- Variables.
+local variable = token(l.VARIABLE,
+                       '$' * l.word +
+                       '$' * l.delimited_range('{}', true, true))
+
+-- Operators.
+local operator = token(l.OPERATOR, S('=!<>+-/*^&|~.,:;?()[]{}'))
+
+M._rules = {
+  {'whitespace', ws},
+  {'shebang', shebang},
+  {'variable', variable},
+  {'identifier', identifier},
+  {'string', string},
+  {'comment', comment},
+  {'number', number},
+  {'operator', operator},
+}
+
+M._tokenstyles = {
+  shebang = l.STYLE_LABEL
+}
+
+M._foldsymbols = {
+  _patterns = {'%l+'},
+  [l.KEYWORD] = {
+    begin = 1, ['for'] = 1, ['fn'] = 1, ['if'] = 1, switch = 1,
+    ['while'] = 1, ['end'] = -1
+  }
+}
+
+return M
