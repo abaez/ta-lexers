@@ -24,9 +24,13 @@ local sq_str = l.delimited_range("'", false, true)
 local dq_str = l.delimited_range('"')
 local str = token(l.STRING, sq_str + dq_str)
 
--- Numbers
+-- Numbers.
 local number = token(l.NUMBER, l.float + l.integer)
 
+-- Keywords.
+local keyword = token(l.KEYWORD, word_match{
+  'alias', 'bg', 'command', 'disown', 'drop', 'echo', 'else', 'end', 'exit', 'export', 'fg', 'fn', 'for', 'if', 'in', 'let', 'unalias', 'suspend', 'test', 'while'
+})
 
 -- Variables.
 local variable = token(l.VARIABLE,
@@ -39,6 +43,7 @@ local operator = token(l.OPERATOR, S('=!<>+-/*^&|~.,:;?()[]{}'))
 M._rules = {
   {'whitespace', ws},
   {'shebang', shebang},
+  {'keyword', keyword},
   {'variable', variable},
   {'identifier', identifier},
   {'string', string},
@@ -54,8 +59,7 @@ M._tokenstyles = {
 M._foldsymbols = {
   _patterns = {'%l+'},
   [l.KEYWORD] = {
-    begin = 1, ['for'] = 1, ['fn'] = 1, ['if'] = 1, switch = 1,
-    ['while'] = 1, ['end'] = -1
+    ['if'] = 1, ['fn'] = 1, ['for'] = 1, ['while'] = 1, ['end'] = -1
   }
 }
 
