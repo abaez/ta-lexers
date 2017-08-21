@@ -46,8 +46,8 @@ local keyword = token(l.KEYWORD, word_match{
   'proc',       'pub',        'pure',     'ref',      'return',
   'Self',       'self',       'sizeof',   'static',   'struct',
   'super',      'trait',      'true',     'type',     'typeof',
-  'unsafe',     'unsized',    'use',      'virtual',  'where',
-  'while',      'yield'
+  'union',      'unsafe',     'unsized',    'use',    'virtual',
+  'where',      'while',      'yield'
 })
 
 -- Library types
@@ -62,8 +62,8 @@ local lifetime = token('lifetime', "'" * ("static" + l.alnum))
 -- Types.
 local type = token(l.TYPE, word_match{
   'bool', 'isize', 'usize', 'char', 'str',
-  'u8', 'u16', 'u32', 'u64', 'i8', 'i16', 'i32', 'i64',
-  'f32','f64',
+  'u8', 'u16', 'u32', 'u64', 'u128', 'i8', 'i16', 'i32', 'i64', 'i128',
+  'f32','f64'
 })
 
 -- Identifiers.
