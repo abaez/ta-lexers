@@ -20,7 +20,8 @@ local block_comment = '{-' * (l.any - '-}')^0 * P('-}')^-1
 local comment = token(l.COMMENT, line_comment + block_comment)
 
 -- Strings.
-local string = token(l.STRING, l.delimited_range('"'))
+local raw_str = '"""' * (l.any - '"""')^0 * P('"""')^-1
+local string = token(l.STRING, raw_str + l.delimited_range('"'))
 
 -- Chars.
 local char = token(l.STRING, "'" * l.alpha * "'")
